@@ -6,12 +6,31 @@ namespace Src\Tests\Models;
 use PHPUnit\Framework\TestCase;
 use Src\Aposentadoria\Models\Usuario;
 
-class UsuarioTest extends TestCase {
+class UsuarioTest extends TestCase
+{
   protected Usuario $user;
 
-  public function testShouldBeTired() 
+  public function testCheckIsRetiredWhenAgeAndTimeAreEnough()
   {
-    $this->user = new Usuario(64, 30);
-    $this->assertTrue($this->user->checkIsRetired());
+    // Arrange
+    $usuario = new Usuario(65, 30);
+
+    // Act
+    $result = $usuario->checkIsRetired();
+
+    // Assert
+    $this->assertTrue($result);
+  }
+
+  public function testCheckIsRetiredWhenOnlyAgeIsEnough()
+  {
+    // Arrange
+    $usuario = new Usuario(65, 20);
+
+    // Act
+    $result = $usuario->checkIsRetired();
+
+    // Assert
+    $this->assertTrue($result);
   }
 }
